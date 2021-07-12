@@ -29,7 +29,7 @@ Naming Convention: userstoryID.incrementor
 |2|1.2|Readable output for user to make use of script|
 |3|1.3|Interface for user with adequate UX|
 |4|2.1|Store user location input and use that in scrape search|
-|5|3.1|Apply users prefered distance to scrape search|
+|5|3.1|Apply users preferred distance to scrape search|
 |6|4.1|Scrape search appropriate job types|
 |7|5.1|Take input for allowed job post age|
 |8|5.2|Check for job post date and only scrape ones that are younger than user input|
