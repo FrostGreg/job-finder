@@ -1,21 +1,19 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 
 
 class IndeedSearch:
-    def __init__(self, location):
+    def __init__(self, location: str, job_type="temporary", radius="0"):
         self.PATH = "assets/chromedriver.exe"
         self.driver = webdriver.Chrome(self.PATH)
-        self.location = location
-        self.driver.get("https://uk.indeed.com/jobs?l=" + self.location + "&radius=0&jt=temporary")
+        self.driver.get("https://uk.indeed.com/jobs?l=" + location + "&radius=" + radius + "&jt=" + job_type)
 
-    def get_length(self):
+    def get_length(self) -> str:
         total = self.driver.find_element_by_id("searchCountPages")
         total = total.text.split()[3]
         return total + " estimated jobs"
 
-    def get_links(self):
+    def get_links(self) -> list[str]:
         links = []
 
         while 1:
