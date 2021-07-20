@@ -1,20 +1,107 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Job Finder</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="author" content="Gregory Frost">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <div id="heading">
-        <h1>Job Finder</h1>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="author" content="Gregory Frost" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="heading">
+      <h1 class="heading" id="title">Job Finder</h1>
+      <hr />
     </div>
-    <div id="container">
-        <hr>
-        Press to get results
-        <br><input type="button" value="Press Me">
+    <div id="left-column" class="container" style="float: left">
+      <h2>Contact Me:</h2>
+      <hr class="container-title-underline" />
+      <br />
+      GitHub Image<br />
+      Git link to page<br />
+      <br />
+      Linked in Image<br />
+      Linked in link to page<br />
     </div>
+    <div id="center-column" class="container">
+      <br /><input type="button" value="Search" class="search" />
+      <br />
+      <h2>Job Title</h2>
+      <hr class="hr-contain" />
+      <br />
+      <input type="text" value="Type here..." /><br />
+      <h2>Job Type</h2>
+      <hr class="hr-contain" />
+      <br />
+      <div
+        id="job-type"
+        style="display: inline-flex; text-align: center; width: 100%"
+      >
+        <div id="jt-left" style="float: left; width: 50%">
+          <h3>Full-Time</h3>
+          <br />
+          <input type="checkbox" />
+          <br />
+          <h3>Temporary</h3>
+          <br />
+          <input type="checkbox" />
+        </div>
+        <div id="jt-right" style="float: right; width: 50%">
+          <h3>Part-Time</h3>
+          <br />
+          <input type="checkbox" />
+          <br />
+          <h3>Volunteer</h3>
+          <br />
+          <input type="checkbox" />
+        </div>
+      </div>
 
-</body>
+      <br />
+      <br />
+      <h2>Job Radius</h2>
+      <hr class="hr-contain" />
+      <br />
+      <select id="radius">
+        <option value="0">Exact Location Only</option>
+        <option value="5">5 Miles</option>
+        <option value="10">10 Miles</option>
+        <option value="25">25 Miles</option>
+      </select>
+
+      <br />
+      <h2>Job Sites</h2>
+      <hr class="hr-contain" />
+      <br />
+
+      <div id="job-sites" style="display:inline-flex; text-align: center; width:100%;">
+        <div id="js-left"  style="float: left; width: 50%">
+          <h3>Indeed</h3>
+          <input type="checkbox" />
+          <h3>Monster</h3>
+          <input type="checkbox" />
+        </div>
+        <div id="js-right"  style="float: right; width: 50%">
+          <h3>TotalJobs</h3>
+          <br />
+
+          <input type="checkbox" />
+        </div>
+      </div>
+
+      <br />
+
+      <br />
+
+      <br />
+      <input type="button" value="Search" class="search" />
+    </div>
+    <div id="right-column" class="container" style="float: right">
+      <h2>Settings</h2>
+      <hr class="container-title-underline" />
+      <h3>Light Mode</h3>
+      <input type="checkbox" />
+      <br />
+      <h3>Dark Mode</h3>
+      <input type="checkbox" />
+    </div>
+  </body>
 </html>

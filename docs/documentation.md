@@ -45,3 +45,15 @@ The system will be using a Django + Python Selenium back-end, this will consist 
 The front end of the system will be developed in HTML, making use of CSS for any styling and JavaScript for the data cleaning and validation.
 
 Data validation will be done in the website through JavaScript as well as in the back-end in django before being processed by the selenium script.
+
+
+## Prototype
+A light mode and dark mode prototype for the front end design
+
+### Light Mode:
+
+![Image of light mode prototype](assets/prototype-light.PNG)
+
+### Dark Mode:
+
+![Image of dark mode prototype](assets/prototype-dark.PNG)
