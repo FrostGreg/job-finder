@@ -3,10 +3,13 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 class IndeedSearch:
-    def __init__(self, location: str, job_type="temporary", radius="0"):
+    def __init__(self, location: str, title=None, job_type="temporary", radius="0"):
         self.PATH = "assets/chromedriver.exe"
         self.driver = webdriver.Chrome(self.PATH)
-        self.driver.get("https://uk.indeed.com/jobs?l=" + location + "&radius=" + radius + "&jt=" + job_type)
+        if title:
+            title = "q=" + title + "&"
+        self.driver.get(
+            "https://uk.indeed.com/jobs?" + title + "l=" + location + "&radius=" + radius + "&jt=" + job_type)
 
     def get_length(self) -> str:
         total = self.driver.find_element_by_id("searchCountPages")
@@ -33,7 +36,7 @@ class IndeedSearch:
 
 
 if __name__ == "__main__":
-    new = IndeedSearch("Newark-on-Trent")
+    new = IndeedSearch("Newark-on-Trent", "warehouse")
 
     print(new.get_length())
 
