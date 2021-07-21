@@ -8,6 +8,8 @@ class IndeedSearch:
         self.driver = webdriver.Chrome(self.PATH)
         if title:
             title = "q=" + title + "&"
+        else:
+            title = ""
         self.driver.get(
             "https://uk.indeed.com/jobs?" + title + "l=" + location + "&radius=" + radius + "&jt=" + job_type)
 
@@ -24,9 +26,9 @@ class IndeedSearch:
             for i in jobs_num:
                 links.append(i.get_attribute("href"))
 
-            ul = self.driver.find_element_by_class_name("pagination-list")
-            last_btn = ul.find_elements_by_tag_name("li")[-1]
             try:
+                ul = self.driver.find_element_by_class_name("pagination-list")
+                last_btn = ul.find_elements_by_tag_name("li")[-1]
                 next_page = last_btn.find_element_by_tag_name("a")
                 self.driver.get(next_page.get_attribute("href"))
             except NoSuchElementException:
