@@ -38,7 +38,7 @@ class IndeedSearch:
 
 
 if __name__ == "__main__":
-    new = IndeedSearch("Newark-on-Trent", "warehouse")
+    new = IndeedSearch("Newark-on-Trent")
 
     print(new.get_length())
 
