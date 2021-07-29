@@ -4,8 +4,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 class IndeedSearch:
     def __init__(self, location: str, title=None, job_type="temporary", radius="0"):
-        self.PATH = "assets/chromedriver.exe"
-        self.driver = webdriver.Chrome(self.PATH)
+        self.driver = webdriver.Chrome()
         if title:
             title = "q=" + title + "&"
         else:
