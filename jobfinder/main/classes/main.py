@@ -51,7 +51,8 @@ class IndeedSearch:
                 break
 
         self.driver.quit()
-        return links
+        # return list with no duplicates
+        return list(dict.fromkeys(links))
 
 
 if __name__ == "__main__":
