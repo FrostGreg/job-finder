@@ -33,6 +33,7 @@ class IndeedSearch:
             except NoSuchElementException:
                 break
 
+        self.driver.quit()
         return links
 
 
