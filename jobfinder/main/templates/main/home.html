@@ -1,109 +1,109 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Job Finder</title>
     {% load static %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <meta name="author" content="Gregory Frost" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <div class="heading">
-      <h1 class="heading" id="title">Job Finder</h1>
-      <hr />
-    </div>
-    <div id="left-column" class="container" style="float: left">
-      <h2>Contact Me:</h2>
-      <hr class="container-title-underline" />
-      <br />
-      <a href="https://github.com/FrostGreg">
-        <img src="{% static 'git-logo.png'%}" width=150 height= 150 alt="Github logo">
-      </a><br />
-      Git link to page<br />
-      <br />
-      <a href="https://linkedin.com/in/greg-frost-702b00215">
-        <img src="{% static 'linked-logo.png'%}" width=150 height= 150 alt="LinkedIn logo">
-      </a>
-      <br />
-      Linked in link to page<br />
-    </div>
-    <div id="center-column" class="container">
-      <form method="post" action="result">
-        {% csrf_token %}
-        <br /><button type="submit" value="Search" id="search-top" name="search" class="search" >Search</button>
-        <br />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <meta name="author" content="Gregory Frost"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<div class="heading">
+    <h1 class="heading" id="title">Job Finder</h1>
+    <hr/>
+</div>
+<div id="left-column" class="container" style="float: left">
+    <h2>Contact Me:</h2>
+    <hr class="container-title-underline"/>
+    <br/>
+    <a href="https://github.com/FrostGreg">
+        <img src="{% static 'git-logo.png'%}" width=150 height=150 alt="Github logo">
+    </a><br/>
+    Git link to page<br/>
+    <br/>
+    <a href="https://linkedin.com/in/greg-frost-702b00215">
+        <img src="{% static 'linked-logo.png'%}" width=150 height=150 alt="LinkedIn logo">
+    </a>
+    <br/>
+    Linked in link to page<br/>
+</div>
+<div id="center-column" class="container">
+    <form method="get" action="result">
+        <br/>
+        <button type="submit" value="search" id="search-top" name="search" class="search"><span>Search</span></button>
+        <br/>
         <h2>Job Title</h2>
-        <hr class="hr-contain" />
-        <br />
-        <input type="text" id="job-title" name="job-title" value="" /><br />
+        <hr class="hr-contain"/>
+        <br/>
+        <input type="text" class="input-text" id="job-title" name="job-title" value=""/><br/>
         <h2>Job Type</h2>
-        <hr class="hr-contain" />
-        <br />
+        <hr class="hr-contain"/>
+        <br/>
         <div
-          id="job-type"
-          style="display: inline-flex; text-align: center; width: 100%"
+                id="job-type"
+                style="display: inline-flex; text-align: center; width: 100%"
         >
-          <div id="jt-left" style="float: left; width: 50%">
-            <h3>Full-Time</h3>
-            <input id="full-time" name="c-full" type="checkbox" />
-            <h3>Temporary</h3>
-            <input id="temporary" name="c-temp" type="checkbox" />
-          </div>
-          <div id="jt-right" style="float: right; width: 50%">
-            <h3>Part-Time</h3>
-            <input id="part-time" name="c-part" type="checkbox" />
-            <h3>Volunteer</h3>
-            <input id="volunteer" name="c-vol" type="checkbox" />
-          </div>
+            <div id="jt-left" style="float: left; width: 50%">
+                <h3>Full-Time</h3>
+                <input id="full-time" class="tick" name="c-full" type="checkbox"/>
+                <h3>Temporary</h3>
+                <input id="temporary" class="tick" name="c-temp" type="checkbox"/>
+            </div>
+            <div id="jt-right" style="float: right; width: 50%">
+                <h3>Part-Time</h3>
+                <input id="part-time" class="tick" name="c-part" type="checkbox"/>
+                <h3>Volunteer</h3>
+                <input id="volunteer" class="tick" name="c-vol" type="checkbox"/>
+            </div>
         </div>
 
-        <br />
-        <br />
+        <br/>
+        <br/>
         <h2>Job Radius</h2>
-        <hr class="hr-contain" />
-        <br />
-        <select id="radius" name="radius">
-          <option value="0">Exact Location Only</option>
-          <option value="5">5 Miles</option>
-          <option value="10">10 Miles</option>
-          <option value="25">25 Miles</option>
+        <hr class="hr-contain"/>
+        <br/>
+        <select id="radius" class="selection" name="radius">
+            <option value="0">Exact Location Only</option>
+            <option value="5">5 Miles</option>
+            <option value="10">10 Miles</option>
+            <option value="25">25 Miles</option>
         </select>
 
-        <br />
+        <br/>
         <h2>Job Sites</h2>
-        <hr class="hr-contain" />
-        <br />
+        <hr class="hr-contain"/>
+        <br/>
 
         <div
-          id="job-sites"
-          style="display: inline-flex; text-align: center; width: 100%"
+                id="job-sites"
+                style="display: inline-flex; text-align: center; width: 100%"
         >
-          <div id="js-left" style="float: left; width: 50%">
-            <h3>Indeed</h3>
-            <input id="indeed" name="c-indeed" type="checkbox" />
-            <h3>Monster</h3>
-            <input id="monster" name="c-monster" type="checkbox" disabled />
-          </div>
-          <div id="js-right" style="float: right; width: 50%">
-            <h3>TotalJobs</h3>
-            <input id="totaljobs" name="c-totaljobs" type="checkbox" disabled />
-          </div>
+            <div id="js-left" style="float: left; width: 50%">
+                <h3>Indeed</h3>
+                <input id="indeed" name="c-indeed" type="checkbox"/>
+                <h3>Monster</h3>
+                <input id="monster" name="c-monster" type="checkbox" disabled/>
+            </div>
+            <div id="js-right" style="float: right; width: 50%">
+                <h3>TotalJobs</h3>
+                <input id="totaljobs" name="c-totaljobs" type="checkbox" disabled/>
+            </div>
         </div>
 
-        <br />
+        <br/>
 
-        <br />
+        <br/>
 
-        <br />
-      </form>
-    </div>
-    <div id="right-column" class="container" style="float: right">
-      <h2>Settings</h2>
-      <hr class="container-title-underline" />
-      <h3>Light Mode</h3>
-      <input id="light" type="checkbox" disabled />
-      <h3>Dark Mode</h3>
-      <input id="dark" type="checkbox" disabled />
-    </div>
-  </body>
+        <br/>
+    </form>
+</div>
+<div id="right-column" class="container" style="float: right">
+    <h2>Settings</h2>
+    <hr class="container-title-underline"/>
+    <h3>Light Mode</h3>
+    <input id="light" class="tick" type="checkbox" checked disabled/>
+    <h3>Dark Mode</h3>
+    <input id="dark" class="tick" type="checkbox" disabled/>
+</div>
+</body>
 </html>
