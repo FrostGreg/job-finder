@@ -16,6 +16,6 @@ def index(response):
 
             result = new.get_links()
 
-            return render(response, "main/result.html", {"links": result})
+            return render(response, "main/result.html", {"jobs": result})
 
     return render(response, "main/home.html", {})

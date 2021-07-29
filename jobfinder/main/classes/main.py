@@ -2,6 +2,15 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
 
+class Job:
+    def __init__(self, name: str, url: str):
+        self.name = name
+        self.url = url
+
+    def __str__(self):
+        return self.name
+
+
 class IndeedSearch:
     def __init__(self, location: str, title=None, job_type="temporary", radius="0"):
         self.driver = webdriver.Chrome()
@@ -17,13 +26,21 @@ class IndeedSearch:
         total = total.text.split()[3]
         return total + " estimated jobs"
 
-    def get_links(self) -> list[str]:
+    def get_links(self) -> list[Job]:
         links = []
 
         while 1:
             jobs_num = self.driver.find_elements_by_class_name("tapItem")
             for i in jobs_num:
-                links.append(i.get_attribute("href"))
+                url = i.get_attribute("href")
+                spans = i.find_element_by_class_name("jobTitle").find_elements_by_tag_name("span")
+                name = ""
+                for span in spans:
+                    if not span.get_attribute("class"):
+                        name = span.get_attribute("title")
+                        break
+
+                links.append(Job(name, url))
 
             try:
                 ul = self.driver.find_element_by_class_name("pagination-list")
