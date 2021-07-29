@@ -1,0 +1,20 @@
+<!DOCType html>
+<html>
+<head>
+    <title>Result page</title>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</head>
+<body>
+    <h1>This is the result page</h1>
+    <button onclick="goBack()">Go Back</button>
+    <ul>
+        {% for job in jobs %}
+            <li><a href="{{job.url}}">{{job.name}}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
