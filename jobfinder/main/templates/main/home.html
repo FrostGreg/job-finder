@@ -1,41 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Job Finder</title>
+{% extends "main/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block heading %}Job Finder{% endblock %}
+
+{% block left-content %}
     {% load static %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
-    <meta name="author" content="Gregory Frost"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-</head>
-<body>
-<div class="heading">
-    <h1 class="heading" id="title">Job Finder</h1>
-    <hr/>
-</div>
-<div id="left-column" class="container" style="float: left">
     <h2>Contact Me:</h2>
     <hr class="container-title-underline"/>
     <br/>
     <a href="https://github.com/FrostGreg">
         <img src="{% static 'git-logo.png'%}" width=150 height=150 alt="Github logo">
     </a><br/>
-    Git link to page<br/>
     <br/>
     <a href="https://linkedin.com/in/greg-frost-702b00215">
         <img src="{% static 'linked-logo.png'%}" width=150 height=150 alt="LinkedIn logo">
     </a>
     <br/>
-    Linked in link to page<br/>
-</div>
-<div id="center-column" class="container">
+{% endblock %}
+
+{% block center-content %}
     <form method="get" action="result">
         <br/>
         <button type="submit" value="search" id="search-top" name="search" class="search"><span>Search</span></button>
         <br/>
+        <h2>Job Location</h2>
+        <hr class="hr-contain">
+        <br>
+        <input type="text" class="input-text" id="job-location" name="job-location" onfocus="this.value=''" value="Type Here.."><br>
+        <br>
         <h2>Job Title</h2>
         <hr class="hr-contain"/>
         <br/>
-        <input type="text" class="input-text" id="job-title" name="job-title" value=""/><br/>
+        <input type="text" class="input-text" id="job-title" name="job-title" onfocus="this.value=''" value="Type Here..."/><br/>
         <h2>Job Type</h2>
         <hr class="hr-contain"/>
         <br/>
@@ -86,7 +83,7 @@
             </div>
             <div id="js-right" style="float: right; width: 50%">
                 <h3>TotalJobs</h3>
-                <input id="totaljobs" name="c-totaljobs" type="checkbox" disabled/>
+                <input id="totaljobs" name="c-totaljobs" type="checkbox"/>
             </div>
         </div>
 
@@ -96,14 +93,14 @@
 
         <br/>
     </form>
-</div>
-<div id="right-column" class="container" style="float: right">
+{% endblock %}
+
+{% block right-content %}
     <h2>Settings</h2>
     <hr class="container-title-underline"/>
     <h3>Light Mode</h3>
     <input id="light" class="tick" type="checkbox" checked disabled/>
     <h3>Dark Mode</h3>
     <input id="dark" class="tick" type="checkbox" disabled/>
-</div>
-</body>
-</html>
+{% endblock %}
+

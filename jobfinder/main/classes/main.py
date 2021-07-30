@@ -1,5 +1,9 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from time import sleep
 
 
 class Job:
@@ -12,7 +16,7 @@ class Job:
 
 
 class IndeedSearch:
-    def __init__(self, location: str, title=None, job_type="temporary", radius="0"):
+    def __init__(self, location="London", title=None, job_type="temporary", radius="0"):
         self.driver = webdriver.Chrome()
         if title:
             title = "q=" + title + "&"
@@ -55,13 +59,55 @@ class IndeedSearch:
         return list(dict.fromkeys(links))
 
 
+class TotalJobsSearch:
+    def __init__(self, location="London", title=None, job_type="temporary", radius="0"):
+        self.driver = webdriver.Chrome()
+        if title:
+            title = "/" + title
+        else:
+            title = ""
+
+        self.driver.get(
+            "https://totaljobs.com/jobs/" + job_type + title + "/in-" + location + "?radius=" +
+            radius + "&s=header")
+
+    def get_links(self):
+        links = []
+        sleep(5)
+        try:
+            WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located((By.CLASS_NAME, "bhZgoA"))
+            )
+        except:
+            self.driver.quit()
+            return []
+
+        try:
+            num_pages = self.driver.find_elements_by_class_name("gwcKwa")[-1].get_attribute("innerHTML")
+        except IndexError:
+            num_pages = 2
+
+        for _ in range(1, int(num_pages)):
+            jobs_num = self.driver.find_elements_by_class_name("bhZgoA")
+            for i in jobs_num:
+                url = i.get_attribute("href")
+                name = i.find_element_by_tag_name("h2").get_attribute("innerHTML")
+                links.append(Job(name, url))
+
+            try:
+                pagination_next = self.driver.find_elements_by_class_name("igiYgL")[-1]
+                next_link = pagination_next.get_attribute("href")
+                self.driver.get(next_link)
+            except IndexError:
+                break
+
+        self.driver.quit()
+        # return list with no duplicates
+        return list(dict.fromkeys(links))
+
+
 if __name__ == "__main__":
-    new = IndeedSearch("Newark-on-Trent")
-
-    print(new.get_length())
-
-    result = new.get_links()
-    for link in result:
-        print(link)
-
-    print(len(result), "jobs found")
+    new = TotalJobsSearch("Newark", "warehouse", "temporary", "20")
+    x = new.get_links()
+    for job in x:
+        print(job)
