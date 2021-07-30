@@ -12,6 +12,9 @@ def index(response):
 
 
 def result(response):
+    location = response.GET.get("job-location")
+    if len(location) == 0:
+        location = None
     title = response.GET.get("job-title")
     radius = response.GET.get("radius")
     jobs = []
@@ -20,10 +23,10 @@ def result(response):
                      "c-vol": "volunteer"}
     for element in response.GET:
         if element in check_to_type:
-            new = IndeedSearch("Newark-on-Trent", job_type=check_to_type[element], title=title, radius=radius)
+            new = IndeedSearch(location=location, job_type=check_to_type[element], title=title, radius=radius)
             jobs += new.get_links()
 
-    new = IndeedSearch("Newark-on-Trent", title=title, radius=radius)
+    new = IndeedSearch(location=location, title=title, radius=radius)
     jobs += new.get_links()
 
     return render(response, "main/result.html", {"jobs": jobs})

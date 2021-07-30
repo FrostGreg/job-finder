@@ -12,7 +12,7 @@ class Job:
 
 
 class IndeedSearch:
-    def __init__(self, location: str, title=None, job_type="temporary", radius="0"):
+    def __init__(self, location="London", title=None, job_type="temporary", radius="0"):
         self.driver = webdriver.Chrome()
         if title:
             title = "q=" + title + "&"
@@ -54,9 +54,12 @@ class IndeedSearch:
         # return list with no duplicates
         return list(dict.fromkeys(links))
 
+class TotalJobs:
+    pass
+
 
 if __name__ == "__main__":
-    new = IndeedSearch("Newark-on-Trent")
+    new = IndeedSearch()
 
     print(new.get_length())
 

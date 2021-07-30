@@ -12,13 +12,11 @@
     <a href="https://github.com/FrostGreg">
         <img src="{% static 'git-logo.png'%}" width=150 height=150 alt="Github logo">
     </a><br/>
-    Git link to page<br/>
     <br/>
     <a href="https://linkedin.com/in/greg-frost-702b00215">
         <img src="{% static 'linked-logo.png'%}" width=150 height=150 alt="LinkedIn logo">
     </a>
     <br/>
-Linked in link to page<br/>
 {% endblock %}
 
 {% block center-content %}
@@ -26,10 +24,15 @@ Linked in link to page<br/>
         <br/>
         <button type="submit" value="search" id="search-top" name="search" class="search"><span>Search</span></button>
         <br/>
+        <h2>Job Location</h2>
+        <hr class="hr-contain">
+        <br>
+        <input type="text" class="input-text" id="job-location" name="job-location" onfocus="this.value=''" value="Type Here.."><br>
+        <br>
         <h2>Job Title</h2>
         <hr class="hr-contain"/>
         <br/>
-        <input type="text" class="input-text" id="job-title" name="job-title" value=""/><br/>
+        <input type="text" class="input-text" id="job-title" name="job-title" onfocus="this.value=''" value="Type Here..."/><br/>
         <h2>Job Type</h2>
         <hr class="hr-contain"/>
         <br/>
