@@ -1,0 +1,31 @@
+<!DOCType html>
+<html>
+<head>
+    {% load static %}
+    <title>Job Finder - {% block title%}Base{% endblock %}</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css'%}">
+    <meta name="author" content="Gregory Frost">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>{% block scripts %}{% endblock %}</script>
+</head>
+<body>
+<div class="heading">
+    <h1 class="heading" id="title">{% block heading %}Job Finder{% endblock %}</h1>
+    <hr/>
+</div>
+<div id="left-column" class="container" style="float: left;">
+    <h2></h2>
+    {% block left-content %}
+    {% endblock %}
+</div>
+<div id="center-column" class="container">
+    {% block center-content %}
+    {% endblock %}
+</div>
+<div id="right-column" class="container" style="float: right;">
+    <h2></h2>
+    {% block right-content %}
+    {% endblock %}
+</div>
+</body>
+</html>
