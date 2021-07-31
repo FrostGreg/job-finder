@@ -145,6 +145,6 @@ class MonsterSearch:
 
 
 if __name__ == "__main__":
-    new = MonsterSearch(location="Newark", title="warehouse", radius="5")
+    new = MonsterSearch(location="Newark", title="warehouse", radius="0")
     for i in new.get_links():
         print(i)
