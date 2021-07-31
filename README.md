@@ -7,6 +7,7 @@
 
 ### Future possibilities:
 
+- show hourly rate
 - default to not showing previously applied jobs
 - label for each link for how easy it is to apply i.e.
     - 1 = very simple, has "apply now" button
