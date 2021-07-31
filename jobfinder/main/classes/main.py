@@ -7,9 +7,10 @@ from time import sleep
 
 
 class Job:
-    def __init__(self, name: str, url: str):
+    def __init__(self, name: str, url: str, salary=""):
         self.name = name
         self.url = url
+        self.salary = salary
 
     def __str__(self):
         return self.name
@@ -37,6 +38,10 @@ class IndeedSearch:
             jobs_num = self.driver.find_elements_by_class_name("tapItem")
             for i in jobs_num:
                 url = i.get_attribute("href")
+                try:
+                    salary = i.find_element_by_class_name("salary-snippet").get_attribute("innerHTML")
+                except NoSuchElementException:
+                    salary = ""
                 spans = i.find_element_by_class_name("jobTitle").find_elements_by_tag_name("span")
                 name = ""
                 for span in spans:
@@ -44,7 +49,7 @@ class IndeedSearch:
                         name = span.get_attribute("title")
                         break
 
-                links.append(Job(name, url))
+                links.append(Job(name, url, salary))
 
             try:
                 ul = self.driver.find_element_by_class_name("pagination-list")
@@ -89,10 +94,17 @@ class TotalJobsSearch:
 
         for _ in range(1, int(num_pages)):
             jobs_num = self.driver.find_elements_by_class_name("bhZgoA")
-            for i in jobs_num:
-                url = i.get_attribute("href")
-                name = i.find_element_by_tag_name("h2").get_attribute("innerHTML")
-                links.append(Job(name, url))
+            salary_span = self.driver.find_elements_by_class_name("gQrsAv")
+            idx = 0
+            for job in jobs_num:
+                url = job.get_attribute("href")
+                name = job.find_element_by_tag_name("h2").get_attribute("innerHTML")
+                try:
+                    salary = salary_span[idx].text
+                except NoSuchElementException:
+                    salary = ""
+                links.append(Job(name, url, salary))
+                idx += 1
 
             try:
                 pagination_next = self.driver.find_elements_by_class_name("igiYgL")[-1]
@@ -120,31 +132,41 @@ class MonsterSearch:
         while 1:
             try:
                 jobs_num = WebDriverWait(self.driver, 4).until(
-                    EC.presence_of_all_elements_located((By.CLASS_NAME, "card-title")))
+                    EC.presence_of_all_elements_located((By.CLASS_NAME, "results-card")))
             except:
                 self.driver.quit()
                 return []
 
-            for i in range(found, len(jobs_num)):
-                links.append(Job(jobs_num[i].get_attribute("innerHTML"), self.driver.current_url))
-
             if found == len(jobs_num):
                 break
+
+            # divides 2 as it holds seperate instances for desktop and mobile version i.e. has 2 for every 1 job
+            for i in range(found, len(jobs_num)//2):
+                name = jobs_num[i].find_element_by_class_name("card-title").get_attribute("innerHTML")
+                try:
+                    card_salary = jobs_num[i].find_element_by_class_name("card-salary").find_element_by_tag_name("span")\
+                        .get_attribute("innerHTML")
+                    salary = card_salary.split()
+                    salary = salary[0][:-5] + ' - ' + salary[3][7:]
+
+                except NoSuchElementException:
+                    salary = ""
+                links.append(Job(name, self.driver.current_url, salary))
 
             found = len(jobs_num)
             page_num += 1
             try:
-                end_of_search = self.driver.find_element_by_class_name("drMyVs")
+                self.driver.find_element_by_class_name("drMyVs")
                 break
             except NoSuchElementException:
                 self.driver.get(current + "&page=" + str(page_num))
 
         self.driver.quit()
 
-        return list(dict.fromkeys(links))
+        return links
 
 
 if __name__ == "__main__":
-    new = MonsterSearch(location="Newark", title="warehouse", radius="0")
+    new = TotalJobsSearch(location="Newark", title="warehouse", job_type="temporary", radius="5")
     for i in new.get_links():
         print(i)
