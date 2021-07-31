@@ -16,18 +16,39 @@ function goBack() {
 <ul>
     {% for job in indeed_jobs %}
         <li><a href="{{job.url}}">{{job.name}}</a></li>
+        <span>
+            {% if job.salary %}
+                ( {{job.salary}} )
+            {% else %}
+                (No Salary Info)
+            {% endif %}
+        </span>
     {% endfor %}
 </ul>
 <h2>TotalJobs</h2><hr>
 <ul>
     {% for job in totaljobs_jobs %}
         <li><a href="{{job.url}}">{{job.name}}</a></li>
+        <span>
+            {% if job.salary %}
+                ( {{job.salary}} )
+            {% else %}
+                (No Salary Info)
+            {% endif %}
+        </span>
     {% endfor %}
 </ul>
 <h2>Monster</h2><hr>
 <ul>
     {% for job in monster_jobs %}
         <li><a href="{{job.url}}">{{job.name}}</a></li>
+        <span>
+            {% if job.salary %}
+                ( {{job.salary}} )
+            {% else %}
+                (No Salary Info)
+            {% endif %}
+        </span>
     {% endfor %}
 </ul>
 
