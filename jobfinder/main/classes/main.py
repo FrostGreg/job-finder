@@ -106,8 +106,45 @@ class TotalJobsSearch:
         return list(dict.fromkeys(links))
 
 
+class MonsterSearch:
+    def __init__(self, location="London", title="", radius="5"):
+        self.driver = webdriver.Chrome()
+
+        self.driver.get("https://www.monster.co.uk/jobs/search?q=" + title + "&where=" + location + "&rd=" + radius)
+
+    def get_links(self):
+        links = []
+        found = 0
+        current = self.driver.current_url
+        page_num = 1
+        while 1:
+            try:
+                jobs_num = WebDriverWait(self.driver, 4).until(
+                    EC.presence_of_all_elements_located((By.CLASS_NAME, "card-title")))
+            except:
+                self.driver.quit()
+                return []
+
+            for i in range(found, len(jobs_num)):
+                links.append(Job(jobs_num[i].get_attribute("innerHTML"), self.driver.current_url))
+
+            if found == len(jobs_num):
+                break
+
+            found = len(jobs_num)
+            page_num += 1
+            try:
+                end_of_search = self.driver.find_element_by_class_name("drMyVs")
+                break
+            except NoSuchElementException:
+                self.driver.get(current + "&page=" + str(page_num))
+
+        self.driver.quit()
+
+        return list(dict.fromkeys(links))
+
+
 if __name__ == "__main__":
-    new = TotalJobsSearch("Newark", "warehouse", "temporary", "20")
-    x = new.get_links()
-    for job in x:
-        print(job)
+    new = MonsterSearch(location="Newark", title="warehouse", radius="5")
+    for i in new.get_links():
+        print(i)

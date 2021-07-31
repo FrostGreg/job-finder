@@ -2,6 +2,11 @@
 
 {% block title %}Home{% endblock %}
 
+{% block links %}
+{% load static %}
+<script src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}
+
 {% block heading %}Job Finder{% endblock %}
 
 {% block left-content %}
@@ -20,19 +25,19 @@
 {% endblock %}
 
 {% block center-content %}
-    <form method="get" action="result">
+    <form method="get" name="main_search" action="result" onsubmit="return validate()">
         <br/>
         <button type="submit" value="search" id="search-top" name="search" class="search"><span>Search</span></button>
         <br/>
         <h2>Job Location</h2>
         <hr class="hr-contain">
         <br>
-        <input type="text" class="input-text" id="job-location" name="job-location" onfocus="this.value=''" value="Type Here.."><br>
+        <input type="text" class="input-text" id="job-location" name="job-location" ><br>
         <br>
         <h2>Job Title</h2>
         <hr class="hr-contain"/>
         <br/>
-        <input type="text" class="input-text" id="job-title" name="job-title" onfocus="this.value=''" value="Type Here..."/><br/>
+        <input type="text" class="input-text" id="job-title" name="job-title"/><br/>
         <h2>Job Type</h2>
         <hr class="hr-contain"/>
         <br/>
@@ -42,15 +47,15 @@
         >
             <div id="jt-left" style="float: left; width: 50%">
                 <h3>Full-Time</h3>
-                <input id="full-time" class="tick" name="c-full" type="checkbox"/>
+                <input id="full-time" class="job-type tick" name="c-full" type="checkbox"/>
                 <h3>Temporary</h3>
-                <input id="temporary" class="tick" name="c-temp" type="checkbox"/>
+                <input id="temporary" class="job-type tick" name="c-temp" type="checkbox"/>
             </div>
             <div id="jt-right" style="float: right; width: 50%">
                 <h3>Part-Time</h3>
-                <input id="part-time" class="tick" name="c-part" type="checkbox"/>
+                <input id="part-time" class="job-type tick" name="c-part" type="checkbox"/>
                 <h3>Volunteer</h3>
-                <input id="volunteer" class="tick" name="c-vol" type="checkbox"/>
+                <input id="volunteer" class="job-type tick" name="c-vol" type="checkbox"/>
             </div>
         </div>
 
@@ -77,13 +82,13 @@
         >
             <div id="js-left" style="float: left; width: 50%">
                 <h3>Indeed</h3>
-                <input id="indeed" name="c-indeed" type="checkbox"/>
+                <input id="indeed" class="job-site tick" name="c-indeed" type="checkbox"/>
                 <h3>Monster</h3>
-                <input id="monster" name="c-monster" type="checkbox" disabled/>
+                <input id="monster" class="job-site tick" name="c-monster" type="checkbox"/>
             </div>
             <div id="js-right" style="float: right; width: 50%">
                 <h3>TotalJobs</h3>
-                <input id="totaljobs" name="c-totaljobs" type="checkbox"/>
+                <input id="totaljobs" class="job-site tick" name="c-totaljobs" type="checkbox"/>
             </div>
         </div>
 
@@ -99,8 +104,8 @@
     <h2>Settings</h2>
     <hr class="container-title-underline"/>
     <h3>Light Mode</h3>
-    <input id="light" class="tick" type="checkbox" checked disabled/>
+    <input id="light" class="colour-scheme tick" type="checkbox" checked disabled/>
     <h3>Dark Mode</h3>
-    <input id="dark" class="tick" type="checkbox" disabled/>
+    <input id="dark" class="colour-scheme tick" type="checkbox" disabled/>
 {% endblock %}
 
