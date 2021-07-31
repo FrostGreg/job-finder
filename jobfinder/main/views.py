@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .classes.main import IndeedSearch, TotalJobsSearch
+from .classes.main import IndeedSearch, TotalJobsSearch, MonsterSearch
 
 
 # Create your views here.
@@ -28,6 +28,7 @@ def result(response):
     radius = response.GET.get("radius")
     indeed_jobs = []
     totaljobs_jobs = []
+    monster_jobs = []
     check_to_type = {"c-full": "fulltime",
                      "c-part": "parttime",
                      "c-temp": "temporary",
@@ -40,5 +41,9 @@ def result(response):
             if response.GET.get("c-totaljobs"):
                 new = TotalJobsSearch(location=location, job_type=check_to_type[element], title=title, radius=radius)
                 totaljobs_jobs += new.get_links()
+            if response.GET.get("c-monster"):
+                new = MonsterSearch(location=location, title=title, radius=radius)
+                monster_jobs += new.get_links()
 
-    return render(response, "main/result.html", {"indeed_jobs": indeed_jobs, "totaljobs_jobs": totaljobs_jobs})
+    return render(response, "main/result.html", {"indeed_jobs": indeed_jobs, "totaljobs_jobs": totaljobs_jobs,
+                  "monster_jobs": monster_jobs})
