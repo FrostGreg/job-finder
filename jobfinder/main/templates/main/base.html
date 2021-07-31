@@ -8,7 +8,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block links %}{% endblock %}
-    <script>{% block scripts %}{% endblock %}</script>
+    <script>
+    {% block scripts %}
+    {% endblock %}
+    </script>
 </head>
 <body>
 <div class="heading">
@@ -16,8 +19,10 @@
     <hr/>
 </div>
 <div id="center-column" class="container container-sm">
+    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
     {% block center-content %}
     {% endblock %}
+
 </div>
 
 <div id="left-column" class="container container-sm" style="float: left;">
@@ -32,5 +37,23 @@
     {% endblock %}
 </div>
 
+<script>
+    mybutton = document.getElementById("topBtn");
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+</script>
 </body>
 </html>

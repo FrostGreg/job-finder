@@ -41,3 +41,4 @@ function validate_checkboxes(check_class){
 
     return error;
 }
+
