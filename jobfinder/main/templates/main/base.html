@@ -15,15 +15,17 @@
     <h1 class="heading" id="title"><span>{% block heading %}Job Finder{% endblock %}</span></h1>
     <hr/>
 </div>
+<div id="center-column" class="container container-sm">
+    {% block center-content %}
+    {% endblock %}
+</div>
+
 <div id="left-column" class="container container-sm" style="float: left;">
     <h2></h2>
     {% block left-content %}
     {% endblock %}
 </div>
-<div id="center-column" class="container container-sm">
-    {% block center-content %}
-    {% endblock %}
-</div>
+
 <div id="right-column" class="container container-sm" style="float: right;">
     <h2></h2>
     {% block right-content %}

@@ -81,6 +81,7 @@ ul li a:hover {
   margin: 0;
 }
 
+
 .container {
   width: 25%;
   text-align: center;
@@ -207,15 +208,49 @@ ul li a:hover {
 
 #title:hover span {
   left: -50px;
+  transition-duration:0.9s;
 }
 
 #title span:after {
-  content:' ⌕';
+  content:'⌕';
+  color: rgb(183,213,212);
   opacity:0;
+  top:0;
+  right:-85px;
+  display:inline-block;
   position:absolute;
+  transform: rotateY(180deg);
+  transition-duration:0.9s;
 }
 
 #title:hover span:after {
   opacity:1;
+  right:-60px;
+  display:inline-block;
+  transform: rotateY(360deg);
+  transition-duration:0.9s;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+        display:block;
+        padding:0;
+        border-bottom: 2px solid black;
+    }
+
+    #center-column {
+        width: 100%;
+        padding: 0;
+    }
+
+    #title:hover span{
+        left:0px;
+    }
+
+    #title span:after{
+        content:none;
+    }
 }
 
