@@ -7,13 +7,14 @@ from time import sleep
 
 
 class Job:
-    def __init__(self, name: str, url: str, salary=""):
+    def __init__(self, name: str, url: str, salary="", difficulty=""):
         self.name = name
         self.url = url
         self.salary = salary
+        self.difficulty = difficulty
 
     def __str__(self):
-        return self.name
+        return self.name + self.difficulty
 
 
 class IndeedSearch:
@@ -42,6 +43,13 @@ class IndeedSearch:
                     salary = i.find_element_by_class_name("salary-snippet").get_attribute("innerHTML")
                 except NoSuchElementException:
                     salary = ""
+
+                try:
+                    i.find_element_by_class_name("jobCardShelfContainer")\
+                        .find_element_by_class_name("jobCardShelf").find_element_by_class_name("indeedApply")
+                    difficulty = " - Easy"
+                except NoSuchElementException:
+                    difficulty = ""
                 spans = i.find_element_by_class_name("jobTitle").find_elements_by_tag_name("span")
                 name = ""
                 for span in spans:
@@ -49,7 +57,7 @@ class IndeedSearch:
                         name = span.get_attribute("title")
                         break
 
-                links.append(Job(name, url, salary))
+                links.append(Job(name, url, salary, difficulty))
 
             try:
                 ul = self.driver.find_element_by_class_name("pagination-list")
@@ -167,6 +175,6 @@ class MonsterSearch:
 
 
 if __name__ == "__main__":
-    new = TotalJobsSearch(location="Newark", title="warehouse", job_type="temporary", radius="5")
+    new = IndeedSearch(location="Newark", title="warehouse", job_type="temporary", radius="5")
     for i in new.get_links():
         print(i)

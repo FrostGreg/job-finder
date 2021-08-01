@@ -183,6 +183,11 @@ ul li a:hover {
     outline:none;
 }
 
+.difficulty {
+    color:rgb(13,97,43);
+    font-weight:bold;
+}
+
 #center-column {
   background-color: rgb(119,135,139);
   padding-left: 12%;
