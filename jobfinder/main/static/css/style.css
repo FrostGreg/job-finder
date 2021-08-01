@@ -239,16 +239,29 @@ ul li a:hover {
   z-index: 99;
   border: none;
   outline: none;
-  background-color: red;
+  background-color: rgb(55,62,64);
+  border: 5px solid rgb(48,82,82);
   color: white;
   cursor: pointer;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 18px;
+  padding: 0% 3%;
+  border-radius: 40px;
+  font-size: 50px;
+  box-shadow:none;
+  transform:scale(0.7, 0.8);
+}
+
+#topBtn span:after {
+    padding-bottom:5px;
+    content: '\2039';
+    display:inline-block;
+    bottom:0;
+    transform:rotate(90deg);
 }
 
 #topBtn:hover {
-  background-color: #555;
+  background-color: rgb(48,82,82);
+  border: 5px solid rgb(55,62,64);
+  transform:scale(0.9,1);
 }
 
 @media only screen and (max-width: 600px) {
