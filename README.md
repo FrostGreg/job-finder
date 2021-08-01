@@ -13,6 +13,21 @@ The core of this project is very basic, the user inputs their details into a htm
 
 - A local website that has links to appropriate jobs held on online job boards
 
+## Before you try
+
+- Ensure chromedriver.exe is added to PATH, this can be found in assets/chromedriver.exe
+- Ensure python is added to PATH
+- Requires the following modules (use pip install):
+    - Django
+    - Selenium
+
+## Instructions
+1. navigate to the repo
+2. navigate to the inner job-finder directory
+3. in a terminal type 'python manage.py runserver' this will run on port 8080 (you can change port number by adding the number at the end like 'python manage.py runserver 4040' if thats a real port)
+4. copy given url (usually http://127.0.0.1:8000/)
+
+If you completed all the steps then you will be able to run the website.
 
 ### Screenshots:
 Home page:
