@@ -52,4 +52,4 @@ def result(response):
                 monster_jobs += new.get_links()
 
     return render(response, "main/result.html", {"indeed_jobs": indeed_jobs, "totaljobs_jobs": totaljobs_jobs,
-                  "monster_jobs": monster_jobs})
+                  "monster_jobs": monster_jobs, "found": len(indeed_jobs) + len(totaljobs_jobs) + len(monster_jobs)})

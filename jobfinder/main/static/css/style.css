@@ -43,23 +43,26 @@ button {
   border-radius: 40px;
   display: inline-block;
   transition: 0.9s;
+  font-family:inherit;
 }
 
 button:hover {
-  background-color:rgb(33 56 56);
+  background-color:rgb(33,56,56);
   border-radius:12px;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 ul li{
+  background-color: rgb(123,140,144);
   padding:2%;
   border-radius:15px;
   transition-duration:0.5s;
-
+  border-bottom: 2px solid rgb(86,97,100);
 }
 
 ul li:hover{
     transform:scale(1.25,1.25);
+    background-color:rgb(137 155 158);
 }
 
 ul li a {
@@ -186,6 +189,36 @@ ul li a:hover {
 .difficulty {
     color:rgb(13,97,43);
     font-weight:bold;
+}
+
+.difficulty:hover {
+    color:rgb(13,97,43);
+}
+
+.goBack span {
+    right:-0px;
+    display:inline-block;
+    position:relative;
+    transition-duration:0.9s;
+}
+
+.goBack:hover span{
+    right:-20px;
+    transition-duration:0.9s;
+}
+
+.goBack span:before {
+    content:'\00ab';
+    opacity:0;
+    position:absolute;
+    transition-duration:0.9s;
+    top:0;
+    left:-35px;
+}
+
+.goBack:hover span:before {
+    opacity: 1;
+    left:-30px;
 }
 
 #center-column {

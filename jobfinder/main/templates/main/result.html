@@ -10,8 +10,8 @@ function goBack() {
 {% block heading %}Result{% endblock %}
 
 {% block center-content %}
-<h1>This is the result page</h1>
-<button onclick="goBack()">Go Back</button>
+<h2 style="padding-bottom:5px;"> Found {{found}} jobs</h2>
+<button id="goBack" class="goBack" onclick="goBack()"><span>Go Back</span></button>
 <h2>Indeed</h2><hr>
 <ul>
     {% for job in indeed_jobs %}
