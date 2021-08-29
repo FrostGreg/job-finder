@@ -51,6 +51,12 @@ This new feature will mean the django form request will instead query the sqlite
 
 The will also be an option to trigger a new search in case the user doesn't think the database is up to date
 
+### Database Design
+A diagram of the database table used to store the scraping results
+
+![Image of the database structure](assets/database-table.PNG)
+
+
 
 # Archive
 ## Version 1
