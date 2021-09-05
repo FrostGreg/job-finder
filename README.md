@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is an excuse for me to learn the selenium for python module and the django framework, therefore it is slow by design as it's not for example using the indeed API which would be quicker.
+This project is an excuse for me to learn the selenium for python module and the django framework.
 The goal of this project is not for a fast site.
 
 This project is a local website made using the django framework alongside some static html, css, and javascript in order to have a nice interface for running a selenium script.
