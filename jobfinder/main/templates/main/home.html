@@ -76,10 +76,7 @@
         <hr class="hr-contain"/>
         <br/>
 
-        <div
-                id="job-sites"
-                style="display: inline-flex; text-align: center; width: 100%"
-        >
+        <div id="job-sites" style="display: inline-flex; text-align: center; width: 100%">
             <div id="js-left" style="float: left; width: 50%">
                 <h3>Indeed</h3>
                 <input id="indeed" class="job-site tick" name="c-indeed" type="checkbox"/>
@@ -93,10 +90,18 @@
         </div>
 
         <br/>
+        <h2>Latest Jobs</h2>
+        <h3 style="margin-top:0px;"> (Takes longer)</h3>
+        <hr class="hr-contain"/>
+        <br>
+        <div id="latest-search">
+            <input id="latest" name="latest" class="tick" type="checkbox"/>
+        </div>
 
-        <br/>
+        <br>
+        <br>
 
-        <br/>
+
     </form>
 {% endblock %}
 
@@ -107,5 +112,6 @@
     <input id="light" class="colour-scheme tick" type="checkbox" checked disabled/>
     <h3>Dark Mode</h3>
     <input id="dark" class="colour-scheme tick" type="checkbox" disabled/>
+
 {% endblock %}
 

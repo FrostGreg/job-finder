@@ -37,6 +37,20 @@ Home page:
 Result page:
 
 ![Image of the result page given a user search](docs/assets/result.png)
+
+
+### Whats New in Version 2?
+Version 2 of the job finder app now implements an sqlite3 database that caches previous user searches in order for almost instant load times from previous searches.
+
+The new database is also configured to remove old listings with every new search as keeping inactive ones is useless and keeping active ones wont result in a quicker search as the selenium script still has to search every listing.
+
+Searching through the new database is just as detailed as previous searches the user can select the title, and job type of a listing.
+
+The user can decide if they want the latest searches which will be slower but contain the latest job listings.
+
+The job listing search will remain active for 30 minutes allowing for bookmarking and coming back to later, something that wasn't available in version 1.
+
+
 ### Future possibilities:
 
 - show hourly rate

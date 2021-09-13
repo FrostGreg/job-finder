@@ -1,3 +1,4 @@
+
 {% extends "main/base.html" %}
 {% block title %}Result{% endblock %}
 
@@ -15,10 +16,10 @@ function goBack() {
 <h2>Indeed</h2><hr>
 <ul>
     {% for job in indeed_jobs %}
-        <li><a href="{{job.url}}">{{job.name}}</a><a class="difficulty" >{{job.difficulty}}</a><br>
+        <li><a href="{{job.url}}">{{job.title}}</a><a class="difficulty" > - {{job.difficulty}}</a><br>
         <span>
-            {% if job.salary %}
-                ( {{job.salary}} )
+            {% if job.pay %}
+                ( {{job.pay}} )
             {% else %}
                 (No Salary Info)
             {% endif %}

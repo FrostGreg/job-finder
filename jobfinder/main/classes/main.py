@@ -7,14 +7,14 @@ from time import sleep
 
 
 class Job:
-    def __init__(self, name: str, url: str, salary="", difficulty=""):
-        self.name = name
-        self.url = url
-        self.salary = salary
+    def __init__(self, title: str, link: str, pay="", difficulty=""):
+        self.title = title
+        self.link = link
+        self.pay = pay
         self.difficulty = difficulty
 
     def __str__(self):
-        return self.name + self.difficulty
+        return self.title
 
 
 class IndeedSearch:
@@ -38,7 +38,7 @@ class IndeedSearch:
         while 1:
             jobs_num = self.driver.find_elements_by_class_name("tapItem")
             for i in jobs_num:
-                url = i.get_attribute("href")
+                link = i.get_attribute("href")
                 try:
                     salary = i.find_element_by_class_name("salary-snippet").get_attribute("innerHTML")
                 except NoSuchElementException:
@@ -47,7 +47,7 @@ class IndeedSearch:
                 try:
                     i.find_element_by_class_name("jobCardShelfContainer")\
                         .find_element_by_class_name("jobCardShelf").find_element_by_class_name("indeedApply")
-                    difficulty = " - Easy"
+                    difficulty = "Easy"
                 except NoSuchElementException:
                     difficulty = ""
                 spans = i.find_element_by_class_name("jobTitle").find_elements_by_tag_name("span")
@@ -57,7 +57,7 @@ class IndeedSearch:
                         name = span.get_attribute("title")
                         break
 
-                links.append(Job(name, url, salary, difficulty))
+                links.append(Job(name, link, salary, difficulty))
 
             try:
                 ul = self.driver.find_element_by_class_name("pagination-list")
@@ -105,13 +105,13 @@ class TotalJobsSearch:
             salary_span = self.driver.find_elements_by_class_name("gQrsAv")
             idx = 0
             for job in jobs_num:
-                url = job.get_attribute("href")
+                link = job.get_attribute("href")
                 name = job.find_element_by_tag_name("h2").get_attribute("innerHTML")
                 try:
                     salary = salary_span[idx].text
                 except NoSuchElementException:
                     salary = ""
-                links.append(Job(name, url, salary))
+                links.append(Job(name, link, salary))
                 idx += 1
 
             try:
