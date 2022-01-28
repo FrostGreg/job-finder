@@ -16,7 +16,7 @@ function goBack() {
 <h2>Indeed</h2><hr>
 <ul>
     {% for job in indeed_jobs %}
-        <li><a href="{{job.url}}">{{job.title}}</a><a class="difficulty" > - {{job.difficulty}}</a><br>
+        <li><a href="{{job.link}}">{{job.title}}</a><a class="difficulty" > - {{job.difficulty}}</a><br>
         <span>
             {% if job.pay %}
                 ( {{job.pay}} )
@@ -30,7 +30,7 @@ function goBack() {
 <h2>TotalJobs</h2><hr>
 <ul>
     {% for job in totaljobs_jobs %}
-        <li><a href="{{job.url}}">{{job.name}}</a><a class="difficulty" >{{job.difficulty}}</a><br>
+        <li><a href="{{job.link}}">{{job.name}}</a><a class="difficulty" >{{job.difficulty}}</a><br>
         <span>
             {% if job.salary %}
                 ( {{job.salary}} )
@@ -44,7 +44,7 @@ function goBack() {
 <h2>Monster</h2><hr>
 <ul>
     {% for job in monster_jobs %}
-        <li><a href="{{job.url}}">{{job.name}}</a><a class="difficulty" >{{job.difficulty}}</a><br>
+        <li><a href="{{job.link}}">{{job.name}}</a><a class="difficulty" >{{job.difficulty}}</a><br>
         <span>
             {% if job.salary %}
                 ( {{job.salary}} )
