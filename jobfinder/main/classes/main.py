@@ -1,3 +1,5 @@
+import re
+
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -41,6 +43,8 @@ class IndeedSearch:
                 link = i.get_attribute("href")
                 try:
                     salary = i.find_element_by_class_name("salary-snippet").get_attribute("innerHTML")
+                    no_html = re.compile("<.*?>")
+                    salary = re.sub(no_html, "", salary)
                 except NoSuchElementException:
                     salary = ""
 
