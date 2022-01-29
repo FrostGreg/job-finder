@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from .classes.main import IndeedSearch, TotalJobsSearch, MonsterSearch
-from django.core.exceptions import ObjectDoesNotExist
 from .models import Job
 from datetime import timedelta
 from django.utils import timezone
-import re
 
 
 # Create your views here.
@@ -18,8 +16,8 @@ def index(response):
 
 def latest_search(response):
     """ doesnt need further input validation as default values are used"""
-    location = response.GET.get("job-location").strip()
-    title = response.GET.get("job-title").strip()
+    location = response.GET.get("job-location").strip().lower()
+    title = response.GET.get("job-title").strip().lower()
 
     radius = response.GET.get("radius")
     check_to_type = {"c-full": "fulltime",
@@ -74,11 +72,13 @@ def result(response):
     if response.method == "GET":
         remove_outdated_searches()
 
-        current_jobs = Job.objects.filter(search=response.GET.get("job-title").strip(),
-                                          location=response.GET.get("job-location").strip())
+        title = response.GET.get("job-title").strip().lower()
+        location = response.GET.get("job-location").strip().lower()
+
+        current_jobs = Job.objects.filter(search=title, location=location)
 
         if len(current_jobs) == 0 or response.GET.get("latest"):
-            remove_relevant_searches(response.GET.get("job-title").strip(), response.GET.get("job-location").strip())
+            remove_relevant_searches(title, location)
             latest_search(response)
 
         check_to_type = {"c-full": "fulltime",
@@ -91,13 +91,13 @@ def result(response):
         for element in response.GET:
             if element in check_to_type:
                 indeed_jobs += list(
-                    Job.objects.filter(search=response.GET.get("job-title").strip(), type=check_to_type[element],
+                    Job.objects.filter(search=title, type=check_to_type[element],
                                        board="indeed"))
                 totaljobs_jobs += list(
-                    Job.objects.filter(search=response.GET.get("job-title").strip(), type=check_to_type[element],
+                    Job.objects.filter(search=title, type=check_to_type[element],
                                        board="totaljobs"))
                 monster_jobs += list(
-                    Job.objects.filter(search=response.GET.get("job-title").strip(), type=check_to_type[element],
+                    Job.objects.filter(search=title, type=check_to_type[element],
                                        board="monster"))
 
         if not response.GET.get("c-indeed"):
