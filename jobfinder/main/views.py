@@ -48,9 +48,11 @@ def latest_search(response):
                     Job(search=title, title=job.title, link=job.link, pay=job.pay, difficulty=job.difficulty,
                         radius=radius, location=location, type=check_to_type[element], board="totaljobs").save()
 
-            if response.GET.get("c-monster") and int(radius) >= 5:
+            if response.GET.get("c-monster"):
                 if radius == "25":
                     radius = "20"
+                if int(radius) <= 5:
+                    radius = "5"
                 new = MonsterSearch(location=location, title=title, radius=radius)
                 for job in new.get_links():
                     Job(search=title, title=job.title, link=job.link, pay=job.pay, difficulty=job.difficulty,
@@ -96,7 +98,7 @@ def result(response):
                                        board="totaljobs"))
                 monster_jobs += list(
                     Job.objects.filter(search=response.GET.get("job-title").strip(), type=check_to_type[element],
-                                       board="monster_jobs"))
+                                       board="monster"))
 
         if not response.GET.get("c-indeed"):
             indeed_jobs = []
