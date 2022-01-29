@@ -9,7 +9,7 @@ function validate(){
 }
 
 function validate_text(element_name){
-    var letters = /^[A-Za-z]+$/;
+    var letters = /^[A-Za-z\s]*$/;
     var error = "";
     var element = document.getElementById(element_name).value.trim();
 

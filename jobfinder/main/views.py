@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Job
 from datetime import timedelta
 from django.utils import timezone
+import re
 
 
 # Create your views here.
@@ -16,18 +17,9 @@ def index(response):
 
 
 def latest_search(response):
+    """ doesnt need further input validation as default values are used"""
     location = response.GET.get("job-location").replace(" ", "")
     title = response.GET.get("job-title").strip()
-
-    if len(location) == 0:
-        location = None
-    elif not location.isalpha():
-        location = None
-
-    if len(title) == 0:
-        title = None
-    elif not title.isalpha():
-        title = None
 
     radius = response.GET.get("radius")
     check_to_type = {"c-full": "fulltime",
