@@ -18,7 +18,7 @@ def index(response):
 
 def latest_search(response):
     """ doesnt need further input validation as default values are used"""
-    location = response.GET.get("job-location").replace(" ", "")
+    location = response.GET.get("job-location").strip()
     title = response.GET.get("job-title").strip()
 
     radius = response.GET.get("radius")
@@ -26,7 +26,6 @@ def latest_search(response):
                      "c-part": "parttime",
                      "c-temp": "temporary",
                      "c-vol": "volunteer"}
-    Job.objects.all().delete()
     for element in response.GET:
         if element in check_to_type:
             if response.GET.get("c-indeed"):
@@ -53,20 +52,28 @@ def latest_search(response):
                         radius=radius, location=location, type=check_to_type[element], board="monster").save()
 
 
+def remove_outdated_searches():
+    scheduled_refresh = timezone.now() - timedelta(minutes=30)
+    outdated = Job.objects.filter(date__lte=scheduled_refresh)
+    outdated.delete()
+
+
+def remove_relevant_searches(search: str, location: str):
+    relevant = Job.objects.filter(search=search, location=location)
+    relevant.delete()
+
+
 def result(response):
-    if response.GET.get("latest"):
-        current_jobs = Job.objects.filter(search=response.GET.get("job-title").strip())
-        if len(current_jobs) > 0:
-            date = current_jobs[0].date
-            time_to_refresh = date + timedelta(minutes=30)
-            if timezone.now() > time_to_refresh:
-                latest_search(response)
-        else:
+    if response.method == "GET":
+        remove_outdated_searches()
+
+        current_jobs = Job.objects.filter(search=response.GET.get("job-title").strip(),
+                                          location=response.GET.get("job-location").strip())
+
+        if len(current_jobs) == 0 or response.GET.get("latest"):
+            remove_relevant_searches(response.GET.get("job-title").strip(), response.GET.get("job-location").strip())
             latest_search(response)
 
-    if response.method == "GET":
-        if len(Job.objects.filter(search=response.GET.get("job-title").strip())) == 0:
-            latest_search(response)
         check_to_type = {"c-full": "fulltime",
                          "c-part": "parttime",
                          "c-temp": "temporary",
