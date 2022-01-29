@@ -4,6 +4,11 @@ from django import utils
 
 # Create your models here.
 class Job(models.Model):
+    """ Database model for storing the Job results.
+
+        Args:
+            models.Model : Django standard argument
+    """
     search = models.CharField(max_length=200)
     link = models.CharField(max_length=2083)
     title = models.CharField(max_length=200)
