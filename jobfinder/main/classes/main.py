@@ -93,7 +93,7 @@ class TotalJobsSearch:
         sleep(5)
         try:
             WebDriverWait(self.driver, 5).until(
-                EC.presence_of_element_located((By.CLASS_NAME, "bhZgoA"))
+                EC.presence_of_element_located((By.CLASS_NAME, "icQgnh"))
             )
         except:
             self.driver.quit()
@@ -105,8 +105,8 @@ class TotalJobsSearch:
             num_pages = 2
 
         for _ in range(1, int(num_pages)):
-            jobs_num = self.driver.find_elements_by_class_name("bhZgoA")
-            salary_span = self.driver.find_elements_by_class_name("gQrsAv")
+            jobs_num = self.driver.find_elements_by_class_name("icQgnh")
+            salary_span = self.driver.find_elements_by_class_name("dqVVse")
             idx = 0
             for job in jobs_num:
                 link = job.get_attribute("href")
@@ -179,6 +179,7 @@ class MonsterSearch:
 
 
 if __name__ == "__main__":
-    new = IndeedSearch(location="Newark", title="warehouse", job_type="temporary", radius="5")
+    #new = IndeedSearch(location="Newark", title="warehouse", job_type="temporary", radius="5")
+    new = TotalJobsSearch(location="Newark", title="retail", job_type="part-time", radius="0")
     for i in new.get_links():
         print(i)

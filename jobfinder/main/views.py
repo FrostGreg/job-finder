@@ -26,6 +26,11 @@ def latest_search(response):
                      "c-part": "parttime",
                      "c-temp": "temporary",
                      "c-vol": "volunteer"}
+
+    totalJobsTemp = {"c-full": "permanent",
+                     "c-part": "part-time",
+                     "c-temp": "temporary",
+                     "c-vol": "volunteer"}
     for element in response.GET:
         if element in check_to_type:
             if response.GET.get("c-indeed"):
@@ -37,7 +42,7 @@ def latest_search(response):
             if response.GET.get("c-totaljobs") and element != "c-vol":
                 if radius == "25":
                     radius = "20"
-                new = TotalJobsSearch(location=location, job_type=check_to_type[element], title=title,
+                new = TotalJobsSearch(location=location, job_type=totalJobsTemp[element], title=title,
                                       radius=radius)
                 for job in new.get_links():
                     Job(search=title, title=job.title, link=job.link, pay=job.pay, difficulty=job.difficulty,
