@@ -141,10 +141,12 @@ class MonsterSearch:
         found = 0
         current = self.driver.current_url
         page_num = 1
+        # sleep to allow time for the html to load for the driver
+        sleep(5)
         while 1:
             try:
                 jobs_num = WebDriverWait(self.driver, 4).until(
-                    EC.presence_of_all_elements_located((By.CLASS_NAME, "results-card")))
+                    EC.presence_of_all_elements_located((By.CLASS_NAME, "job-cardstyle__JobCardComponent-sc-1mbmxes-0")))
             except:
                 self.driver.quit()
                 return []
@@ -152,14 +154,12 @@ class MonsterSearch:
             if found == len(jobs_num):
                 break
 
-            # divides 2 as it holds seperate instances for desktop and mobile version i.e. has 2 for every 1 job
-            for i in range(found, len(jobs_num)//2):
-                name = jobs_num[i].find_element_by_class_name("card-title").get_attribute("innerHTML")
+            for i in range(found, len(jobs_num)):
+                name = jobs_num[i].find_element_by_class_name("job-cardstyle__JobCardTitle-sc-1mbmxes-2").get_attribute("innerHTML")
                 try:
-                    card_salary = jobs_num[i].find_element_by_class_name("card-salary").find_element_by_tag_name("span")\
-                        .get_attribute("innerHTML")
-                    salary = card_salary.split()
-                    salary = salary[0][:-5] + ' - ' + salary[3][7:]
+                    card_salary = jobs_num[i].find_elements_by_class_name("job-cardstyle__JobCardDetails-sc-1mbmxes-5")[1].get_attribute("innerHTML")
+
+                    salary = card_salary.strip()
 
                 except NoSuchElementException:
                     salary = ""
@@ -168,7 +168,7 @@ class MonsterSearch:
             found = len(jobs_num)
             page_num += 1
             try:
-                self.driver.find_element_by_class_name("drMyVs")
+                self.driver.find_element_by_class_name("qTiuX")
                 break
             except NoSuchElementException:
                 self.driver.get(current + "&page=" + str(page_num))
@@ -179,7 +179,15 @@ class MonsterSearch:
 
 
 if __name__ == "__main__":
-    #new = IndeedSearch(location="Newark", title="warehouse", job_type="temporary", radius="5")
-    new = TotalJobsSearch(location="Newark", title="retail", job_type="part-time", radius="0")
+    test = 3
+    if test == 1:
+        new = IndeedSearch(location="Newark", title="warehouse", job_type="temporary", radius="5")
+    elif test == 2:
+        new = TotalJobsSearch(location="Newark", title="retail", job_type="part-time", radius="0")
+    elif test == 3:
+        new = MonsterSearch(location="Newark", title="retail", radius="5")
+    else:
+        new = IndeedSearch(location="Newark", title="warehouse", job_type="temporary", radius="5")
+
     for i in new.get_links():
         print(i)
