@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from .classes.main import IndeedSearch, TotalJobsSearch, MonsterSearch
+from .classes.indeed import IndeedSearch
+from .classes.totaljobs import TotalJobsSearch
+from .classes.monster import MonsterSearch
 from .models import Job
 from datetime import timedelta
 from django.utils import timezone
