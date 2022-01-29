@@ -1,4 +1,7 @@
+from dataclasses import dataclass
 
+
+@dataclass
 class Job:
     """ Data class for each job result
 
@@ -9,13 +12,10 @@ class Job:
             difficulty: Listed difficulty of applying
     """
 
-    def __init__(self, title: str, link: str, pay: str = "",
-                 difficulty: str = ""
-                 ):
-        self.title: str = title
-        self.link: str = link
-        self.pay: str = pay
-        self.difficulty: str = difficulty
+    title: str
+    link: str
+    pay: str = ""
+    difficulty: str = ""
 
-    def __str__(self) -> str:
-        return self.title
+    def __hash__(self):
+        return hash(self.title + self.link)
