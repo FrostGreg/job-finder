@@ -29,7 +29,7 @@ function goBack() {
 </ul>
 <h2>TotalJobs</h2><hr>
 <ul>
-    {% for job in totaljobs_jobs %}
+    {% for job in total_jobs %}
         <li><a href="{{job.link}}">{{job.title}}</a><a class="difficulty" >{{job.difficulty}}</a><br>
         <span>
             {% if job.pay %}
