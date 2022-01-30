@@ -75,4 +75,4 @@ class MonsterSearch:
 
         self.driver.quit()
 
-        return links
+        return list(dict.fromkeys(links))
